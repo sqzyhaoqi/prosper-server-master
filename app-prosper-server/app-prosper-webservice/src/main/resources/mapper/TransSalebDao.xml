@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prosper.sale.dao.TransSalebDao">
+
+    <select id="queryListByNos" resultType="com.prosper.sale.entity.TransSaleb">
+        select
+            t.nos,
+            t.nb,
+            t.endprice as money
+        from
+            u2saleb t
+        where
+        ISNULL( t.colthno, '' ) &lt;&gt; ''
+        and t.nos = #{nos}
+    </select>
+
+</mapper>

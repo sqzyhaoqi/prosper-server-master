@@ -1,0 +1,68 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.16.1.42:3306/cozy_sit?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: qwerQWER1234!@#$
+      initial-size: 10
+      max-active: 50
+      min-idle: 10
+      max-wait: 60000
+      default-auto-commit: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 50
+      time-between-eviction-runs-millis: 300000
+      min-evictable-idle-time-millis: 1800000
+      #Oracle需要打开注释
+      #validation-query: SELECT 1 FROM DUAL
+      #下面这两个配置，可以在每次连接的时候判断一些连接是否有效
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    open: true  # 是否开启redis缓存  true开启   false关闭
+    database: 1
+    host: 172.16.1.42
+    port: 6379
+    password: admin123  # 密码（默认为空）
+    timeout: 30000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 2000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 50      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+
+##多数据源的配置
+dynamic:
+  datasource:
+    sybase:
+      driver-class-name: net.sourceforge.jtds.jdbc.Driver
+      url: jdbc:jtds:sybase://172.16.0.161:50960/brand_new;charset=cp936
+      username: sybrunsawx
+      password: sybrunsawx
+
+#自定义配置信息
+app:
+  ws:
+    offest: -1200     #偏移分钟
+    delay: -1      #延迟分钟
+    shoper: TSUBO上海港汇店
+    cusno: 800244
+  task:
+    pushMsgTaskCron: 0 0/1 * * * ?

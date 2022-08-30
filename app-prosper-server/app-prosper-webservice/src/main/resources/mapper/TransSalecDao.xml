@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prosper.sale.dao.TransSalecDao">
+    <select id="queryListByNos" resultType="com.prosper.sale.entity.TransSalec">
+        select
+            t.nos,
+            t.paycode,
+            t.paymoney as money
+        from
+            u2salec t
+        where
+            t.nos = #{nos}
+        AND t.paycode IN ( '21','00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20')
+    </select>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prosper.sale.dao.TransSaleDao">
+
+    <select id="queryListByTime" resultType="com.prosper.sale.entity.TransSale">
+        select
+            t.nos,
+            t.nb,
+            t.salescode,
+            t.outdate,
+            c.paymoney as money,
+            t.gxrq
+        from
+            u2sale t
+        inner join
+            u2salec c
+        on t.nos = c.nos
+        where
+            1=1
+        AND t.satypes NOT IN (17,18)
+        AND t.chflags = '1'
+        AND t.gxrq &gt;= CONVERT ( DateTime, #{sDate} )
+        AND t.gxrq &lt;= CONVERT ( DateTime, #{eDate} )
+        and c.paycode IN ( '01', '02', '03', '05', '08', '10', '12', '13', '07', '00', '17')
+        and t.cusno = #{cusno}
+    </select>
+</mapper>
